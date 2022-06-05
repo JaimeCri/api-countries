@@ -1,0 +1,37 @@
+<h2 class="text-center">Listado</h2>
+<table id="table" class="table table-hover">
+    <thead>
+        <tr>
+            <th>País</th>
+            <th>Capital</th>
+            <th>Población</th>
+            <th>Superficie</th>
+            <th>Continente</th>
+            <th>Detalle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of countries">
+            <td>{{item.name['common']}}</td>
+            <td>{{item.capital}}</td>
+            <td>{{item.population | number}}</td>
+            <td>{{item.area | number}}</td>
+            <td>{{item.continents}}</td>
+            <td>
+                <button (click)="detailCountry(item.name['common'])" class="btn btn-success">Detalle</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="pageTotal" [(page)]="page" [pageSize]="pageSize" (pageChange)="reloadList()">
+    </ngb-pagination>             
+    <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="reloadList()">
+        <option [ngValue]="15">15 registros</option>
+        <option [ngValue]="20">20 registros</option>
+        <option [ngValue]="50">50 registros</option>
+        <option [ngValue]="100">100 registros</option>
+        <option [ngValue]="150">150 registros</option>
+    </select>                
+</div>
